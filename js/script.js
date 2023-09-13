@@ -1,14 +1,13 @@
 /* Constantes ----------------------------------------------------- */
 const BOUTON = document.getElementById("commencer");
 const STATUS = document.getElementById("status");
-const TEMPS_PAUSE = 5;
-const TEMPS_TRAVAIL = 25;
+const TEMPS_PAUSE = 5;      // Temps en minutes
+const TEMPS_TRAVAIL = 25;   // Temps en minutes
 
-/* Fonctions ----------------------------------------------------- */
+/* Evenements ----------------------------------------------------- */
 BOUTON.addEventListener("click", pomodoro);
 
 /* Variables globales ----------------------------------------------------- */
-let dmc_setInterval;
 let minutes = 0;
 let secondes = 0;
 let ilTravail = true;
@@ -71,8 +70,7 @@ function pomodoro() {
         
         minutes = TEMPS_TRAVAIL;
 
-        clearInterval(dmc_setInterval);
-        dmc_setInterval = setInterval(() => {
+        setInterval(() => {
             afficherTemps();
             compteARebour();
         }, 1000);
