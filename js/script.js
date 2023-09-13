@@ -63,13 +63,10 @@ function compteARebour() {
 }
 
 /**
- * Lance le pomodoro
+ * Lance le pomodoro ou redèmare le pomodoro
  */
 function pomodoro() {
-    if (
-        BOUTON.textContent === "commencer"
-        || BOUTON.textContent === "recommencer"
-    ) {
+    if (BOUTON.textContent === "commencer") {
         BOUTON.textContent = "recommencer";
         
         minutes = TEMPS_TRAVAIL;
@@ -79,6 +76,8 @@ function pomodoro() {
             afficherTemps();
             compteARebour();
         }, 1000);
+    } else if (BOUTON.textContent === "recommencer") {
+        location.reload();  // Redémare l'application
     } else {
         console.log("contenue textuel du bouton invalide (fonction pomodoro)");
     }
