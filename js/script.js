@@ -1,6 +1,10 @@
 /* Constantes ----------------------------------------------------- */
 const BOUTON = document.getElementById("commencer");
-const STATUS = document.getElementById("status");
+const STATUS = document.getElementById("label_status");
+
+const NOM_BOUTON_TRAVAIL = "commencer";
+const NOM_BOUTON_PAUSE = "réinitialiser";
+
 const TEMPS_PAUSE = 5;      // Temps en minutes
 const TEMPS_TRAVAIL = 25;   // Temps en minutes
 
@@ -29,7 +33,7 @@ function formatNombreText(nombre) {
  * Affiche le temps
  */
 function afficherTemps() {
-    document.getElementById("label_temps").textContent = `${formatNombreText(minutes)} : ${formatNombreText(secondes)}`;
+    document.getElementById("temps").textContent = `${formatNombreText(minutes)} : ${formatNombreText(secondes)}`;
 }
 
 /**
@@ -65,8 +69,8 @@ function compteARebour() {
  * Lance le pomodoro ou redèmare le pomodoro
  */
 function pomodoro() {
-    if (BOUTON.textContent === "commencer") {
-        BOUTON.textContent = "recommencer";
+    if (BOUTON.textContent === NOM_BOUTON_TRAVAIL) {
+        BOUTON.textContent = NOM_BOUTON_PAUSE;
         
         minutes = TEMPS_TRAVAIL;
 
@@ -74,7 +78,7 @@ function pomodoro() {
             afficherTemps();
             compteARebour();
         }, 1000);
-    } else if (BOUTON.textContent === "recommencer") {
+    } else if (BOUTON.textContent === NOM_BOUTON_PAUSE) {
         location.reload();  // Redémare l'application
     } else {
         console.log("contenue textuel du bouton invalide (fonction pomodoro)");

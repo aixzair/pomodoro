@@ -1,3 +1,47 @@
 body {
+    height: 100%;
+
     font-family: 'Diphylleia', serif;
+    text-align: center;
+
+    background-color: brown;
+}
+
+#status {
+    padding: 5% 0 5% 0;
+
+    align-content: center;
+    /* background-color: red; */
+}
+
+#cercle {
+    height: 120px;
+    width: 120px;
+
+    margin: auto;
+
+    border: 1px;
+    border-radius: 50%;
+
+    background-color: red;
+}
+
+#temps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+}
+
+#bouton {
+    padding-top: 10%;
+
+    align-content: center;
+    /* background-color: green; */
+}
+
+#commencer {
+    background-color: burlywood;
+    color: red;
 }
