@@ -21,7 +21,7 @@ let ilTravail = true;
 /**
  * Renvoies un nombre avec un 0 devant si il n'a qu'un seule chiffre
  * @param {*} nombre 
- * @returns 
+ * @returns le nombre en format textuel
  */
 function formatNombreText(nombre) {
     let string = nombre.toString();
@@ -44,13 +44,13 @@ function compteARebour() {
         if (minutes == 0) {
             if (ilTravail) {
                 ilTravail = false;
-                STATUS.textContent = "pause";
+                STATUS.textContent = "Pause";
 
                 minutes = TEMPS_PAUSE;
                 secondes = 0;
             } else {
                 ilTravail = true;
-                STATUS.textContent = "travail";
+                STATUS.textContent = "Travail";
 
                 minutes = TEMPS_TRAVAIL;
                 secondes = 0;
