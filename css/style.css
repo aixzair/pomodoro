@@ -6,20 +6,14 @@
 }
 
 body {
+    background-color: var(--color-primary);
+
+
     font-family: 'Diphylleia', serif;
     font-size: 40px;
 
     align-content: center;
     text-align: center;
-
-    background-color: var(--color-primary);
-
-    line-height: 1.5;
-    font-weight: 400;
-}
-
-header {
-    display: block;
 }
 
 #titre {
@@ -41,7 +35,7 @@ header {
     border-radius: 50%;
 
     color: var(--color-text-primary);
-    background-color: var(--color-secondary)/*#1565c0*/;
+    background-color: var(--color-secondary);
 }
 
 #temps {
@@ -62,4 +56,18 @@ header {
     color: var(--color-text-primary);
     border: none;
     border-radius: 3px;
+}
+
+/* -------------------- MEDIA QUERIES ----------------------------- */
+
+@media screen and (max-width: 1024px) {
+    .panel {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
 }
