@@ -58,9 +58,8 @@ function changerDuree() {
  * @returns le nombre en format textuel
  */
 function formatNombreText(nombre) {
-    let string = nombre.toString();
-    string = (string.length < 2) ? '0' + string : string;
-    return string;
+    const string = nombre.toString();
+    return (string.length < 2) ? '0' + string : string;
 }
 
 /**
