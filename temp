@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-
-    <title>pomodoro</title>
-
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <header>
+<header>
         <h1 id="titre">Pomodoro</h1>
     </header>
     <div class="boite">
@@ -40,5 +30,5 @@
     </div>
     
     <script src="js/script.js"></script>
-</body>
-</html>
+
+    <link rel="stylesheet" href="css/style.css">
