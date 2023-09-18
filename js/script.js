@@ -15,8 +15,8 @@ const NOM_BOUTON_PAUSE = "réinitialiser";
 
 /* Evenements ------------------------------------------------------------ */
 BOUTON.addEventListener("click", pomodoro);
-INPUT_TEMPS_TRAVAIL.addEventListener("mousemove", changerDuree);
-INPUT_TEMPS_PAUSE.addEventListener("mousemove", changerDuree);
+INPUT_TEMPS_TRAVAIL.addEventListener("input", changerDuree);
+INPUT_TEMPS_PAUSE.addEventListener("input", changerDuree);
 
 
 /* Variables globales ----------------------------------------------------- */
