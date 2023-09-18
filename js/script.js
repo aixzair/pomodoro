@@ -29,6 +29,7 @@ let ilTravail = true;
 let applicationEnFonctionnement = false;
 
 /* Lancement de l'application ---------------------------------------------- */
+// Affectation possible des variables "temps_travail" et "temps_pause" par le local storage
 try {
     temps_travail = parseInt(localStorage.getItem("temps_travail")) || INPUT_TEMPS_TRAVAIL.value;
     temps_pause = parseInt(localStorage.getItem("temps_pause")) || INPUT_TEMPS_PAUSE.value;
@@ -36,6 +37,7 @@ try {
     console.error(exception);
 }
 
+// Modification des valeurs des variables affichées
 MINUTES.textContent = formatNombreText(temps_travail);
 document.getElementById("temps_travail").textContent = formatNombreText(temps_travail);
 document.getElementById("temps_pause").textContent = formatNombreText(temps_pause);
@@ -57,9 +59,11 @@ function changerDuree() {
         return;
     }
 
+    // Récupération des valeurs
     temps_travail = INPUT_TEMPS_TRAVAIL.value;
     temps_pause = INPUT_TEMPS_PAUSE.value;
 
+    // Sauvegarde des données dans le local storage
     try {
         localStorage.setItem("temps_travail", JSON.stringify(temps_travail));
         localStorage.setItem("temps_pause", JSON.stringify(temps_pause));
@@ -67,6 +71,7 @@ function changerDuree() {
         console.error(exception);
     }
 
+    // Modification des valeurs affichées
     MINUTES.textContent = formatNombreText(temps_travail);
     document.getElementById("temps_travail").textContent = formatNombreText(temps_travail);
     document.getElementById("temps_pause").textContent = formatNombreText(temps_pause);
