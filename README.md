@@ -2,7 +2,7 @@
 
 Un outils de travail : gérer votre temps de travail et votre temps de pause.
 
-# Auteur
+## Auteur
 
 Aixzair : Alexandre Lerosier TP 2.1
 
