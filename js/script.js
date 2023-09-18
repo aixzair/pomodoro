@@ -52,6 +52,7 @@ function changerDuree() {
         INPUT_TEMPS_TRAVAIL.value = temps_travail;
         INPUT_TEMPS_PAUSE.value = temps_pause;
         return;
+
     } else if (
         temps_travail == INPUT_TEMPS_TRAVAIL.value
         && temps_pause == INPUT_TEMPS_PAUSE.value
