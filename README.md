@@ -12,7 +12,7 @@ Aixzair : Alexandre Lerosier TP 2.1
 * choisir la durée de votre temps de travail et de pause ;
 * pouvoir redémarrer l'application.
 
-## Instalation
+## Installation
 
 Télécharger les fichiers et ouvré `index.html` avec votre navigateur préféré.
 
