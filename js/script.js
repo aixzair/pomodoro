@@ -20,27 +20,28 @@ INPUT_TEMPS_PAUSE.addEventListener("input", changerDuree);
 
 
 /* Variables globales ----------------------------------------------------- */
-let temps_travail = 25;  // Temps en minutes
-let temps_pause = 0;    // Temps en minutes
+let tempsTravail = 25;     // Temps en minutes
+let tempsPause = 5;        // Temps en minutes
 
-let minutes = 0;
-let secondes = 0;
+let dateFin;
+let dateActuelle;
+
 let ilTravail = true;
 let applicationEnFonctionnement = false;
 
 /* Lancement de l'application ---------------------------------------------- */
 // Affectation possible des variables "temps_travail" et "temps_pause" par le local storage
 try {
-    temps_travail = parseInt(localStorage.getItem("temps_travail")) || INPUT_TEMPS_TRAVAIL.value;
-    temps_pause = parseInt(localStorage.getItem("temps_pause")) || INPUT_TEMPS_PAUSE.value;
+    tempsTravail = parseInt(localStorage.getItem("temps_travail")) || INPUT_TEMPS_TRAVAIL.value;
+    tempsPause = parseInt(localStorage.getItem("temps_pause")) || INPUT_TEMPS_PAUSE.value;
 } catch (exception) {
     console.error(exception);
 }
 
 // Modification des valeurs des variables affichées
-MINUTES.textContent = formatNombreText(temps_travail);
-document.getElementById("temps_travail").textContent = formatNombreText(temps_travail);
-document.getElementById("temps_pause").textContent = formatNombreText(temps_pause);
+MINUTES.textContent = formatNombreText(tempsTravail);
+document.getElementById("temps_travail").textContent = formatNombreText(tempsTravail);
+document.getElementById("temps_pause").textContent = formatNombreText(tempsPause);
 
 /* Fonctions --------------------------------------------------------------- */
 
@@ -49,33 +50,33 @@ document.getElementById("temps_pause").textContent = formatNombreText(temps_paus
  */
 function changerDuree() {
     if (applicationEnFonctionnement) {
-        INPUT_TEMPS_TRAVAIL.value = temps_travail;
-        INPUT_TEMPS_PAUSE.value = temps_pause;
+        INPUT_TEMPS_TRAVAIL.value = tempsTravail;
+        INPUT_TEMPS_PAUSE.value = tempsPause;
         return;
 
     } else if (
-        temps_travail == INPUT_TEMPS_TRAVAIL.value
-        && temps_pause == INPUT_TEMPS_PAUSE.value
+        tempsTravail == INPUT_TEMPS_TRAVAIL.value
+        && tempsPause == INPUT_TEMPS_PAUSE.value
     ) {
         return;
     }
 
     // Récupération des valeurs
-    temps_travail = INPUT_TEMPS_TRAVAIL.value;
-    temps_pause = INPUT_TEMPS_PAUSE.value;
+    tempsTravail = INPUT_TEMPS_TRAVAIL.value;
+    tempsPause = INPUT_TEMPS_PAUSE.value;
 
     // Sauvegarde des données dans le local storage
     try {
-        localStorage.setItem("temps_travail", JSON.stringify(temps_travail));
-        localStorage.setItem("temps_pause", JSON.stringify(temps_pause));
+        localStorage.setItem("temps_travail", JSON.stringify(tempsTravail));
+        localStorage.setItem("temps_pause", JSON.stringify(tempsPause));
     } catch(exception) {
         console.error(exception);
     }
 
     // Modification des valeurs affichées
-    MINUTES.textContent = formatNombreText(temps_travail);
-    document.getElementById("temps_travail").textContent = formatNombreText(temps_travail);
-    document.getElementById("temps_pause").textContent = formatNombreText(temps_pause);
+    MINUTES.textContent = formatNombreText(tempsTravail);
+    document.getElementById("temps_travail").textContent = formatNombreText(tempsTravail);
+    document.getElementById("temps_pause").textContent = formatNombreText(tempsPause);
 }
 
 /**
@@ -92,37 +93,31 @@ function formatNombreText(nombre) {
  * Affiche le temps
  */
 function afficherTemps() {
-    MINUTES.textContent = formatNombreText(minutes);
-    SECONDES.textContent = formatNombreText(secondes);
+    const tempsRestant = dateFin - dateActuelle;
+    MINUTES.textContent = formatNombreText(Math.floor(tempsRestant / (1000 * 60)));
+    SECONDES.textContent = formatNombreText(Math.floor((tempsRestant % (1000 * 60)) / 1000));
+}
+
+function creerDateFin(duree) {
+    return Date.now() + duree * 60 * 1000;
 }
 
 /**
  * Décrémente la durée
  */
 function compteARebour() {
-    if (secondes == 0) {
-        if (minutes == 0) {
-            if (ilTravail) {
-                ilTravail = false;
-                STATUS.textContent = "Pause";
-
-                minutes = temps_pause;
-                secondes = 0;
-            } else {
-                ilTravail = true;
-                STATUS.textContent = "Travail";
-
-                minutes = temps_travail;
-                secondes = 0;
-            }
-            return;
+    // Changement du status
+    if ((dateFin - dateActuelle) <= 0 ) {
+        if (ilTravail) {
+            ilTravail = false;
+            STATUS.textContent = "Pause";
+            dateFin = creerDateFin(tempsPause);
+        } else {
+            ilTravail = true;
+            STATUS.textContent = "Travail";
+            dateFin = creerDateFin(tempsTravail);
         }
-        minutes--;
-        secondes = 59;
-
-        return;
     }
-    secondes--;
 }
 
 /**
@@ -130,14 +125,15 @@ function compteARebour() {
  */
 function pomodoro() {
     if (BOUTON.textContent === NOM_BOUTON_TRAVAIL) {
+        applicationEnFonctionnement = true;
         BOUTON.textContent = NOM_BOUTON_PAUSE;
         
-        minutes = temps_travail;
-        applicationEnFonctionnement = true;
+        dateFin = creerDateFin(tempsTravail);
 
         setInterval(() => {
-            compteARebour();
+            dateActuelle = Date.now();
             afficherTemps();
+            compteARebour();
         }, 1000);
     } else if (BOUTON.textContent === NOM_BOUTON_PAUSE) {
         location.reload();  // Redémare l'application
