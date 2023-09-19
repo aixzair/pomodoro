@@ -10,8 +10,8 @@ const MINUTES = document.getElementById("minutes");
 const SECONDES = document.getElementById("secondes");
 
 /* Code */
-const NOM_BOUTON_TRAVAIL = "commencer";
-const NOM_BOUTON_PAUSE = "réinitialiser";
+const NOM_BOUTON_TRAVAIL = "Commencer";
+const NOM_BOUTON_PAUSE = "Réinitialiser";
 
 /* Evenements ------------------------------------------------------------ */
 BOUTON.addEventListener("click", pomodoro);
@@ -23,17 +23,19 @@ INPUT_TEMPS_PAUSE.addEventListener("input", changerDuree);
 let tempsTravail = 25;     // Temps en minutes
 let tempsPause = 5;        // Temps en minutes
 
-let dateFin;
-let dateActuelle;
-
-let ilTravail = true;
 let applicationEnFonctionnement = false;
+let ilTravail = true;
 
 /* Lancement de l'application ---------------------------------------------- */
+BOUTON.textContent = NOM_BOUTON_TRAVAIL;
+
 // Affectation possible des variables "temps_travail" et "temps_pause" par le local storage
 try {
-    tempsTravail = parseInt(localStorage.getItem("temps_travail")) || INPUT_TEMPS_TRAVAIL.value;
-    tempsPause = parseInt(localStorage.getItem("temps_pause")) || INPUT_TEMPS_PAUSE.value;
+    tempsTravail = parseInt(localStorage.getItem("temps_travail")) 
+    || INPUT_TEMPS_TRAVAIL.value;
+
+    tempsPause = parseInt(localStorage.getItem("temps_pause"))
+    || INPUT_TEMPS_PAUSE.value;
 } catch (exception) {
     console.error(exception);
 }
@@ -92,49 +94,62 @@ function formatNombreText(nombre) {
 /**
  * Affiche le temps
  */
-function afficherTemps() {
-    const tempsRestant = dateFin - dateActuelle;
+function afficherTemps(tempsRestant) {
     MINUTES.textContent = formatNombreText(Math.floor(tempsRestant / (1000 * 60)));
     SECONDES.textContent = formatNombreText(Math.floor((tempsRestant % (1000 * 60)) / 1000));
 }
 
-function creerDateFin(duree) {
-    return Date.now() + duree * 60 * 1000;
+/**
+ * Retourne la date de fin
+ * @param {*} date date actuelle
+ * @param {*} duree durée en minutes
+ * @returns 
+ */
+function calculerDateFin(date, duree) {
+    return date + duree * 60 * 1000 + 1000;
 }
 
 /**
- * Décrémente la durée
+ * Gère le temps et l'affichage
  */
-function compteARebour() {
-    // Changement du status
-    if ((dateFin - dateActuelle) <= 0 ) {
+function cycle(dateFin) {
+    let progression;
+    let dateActuelle = Date.now();
+
+    tempsRestant = dateFin - dateActuelle;
+    if (tempsRestant <= 0 ) {
+        // Changement du status
         if (ilTravail) {
             ilTravail = false;
             STATUS.textContent = "Pause";
-            dateFin = creerDateFin(tempsPause);
+            dateFin = calculerDateFin(dateActuelle, tempsPause);
         } else {
             ilTravail = true;
             STATUS.textContent = "Travail";
-            dateFin = creerDateFin(tempsTravail);
+            dateFin = calculerDateFin(dateActuelle, tempsTravail);
         }
+    } else {
+        // Affiche le temps et augmente la progression
+        afficherTemps(tempsRestant);
+        progression = 1 - tempsRestant / (60 * 1000 * (ilTravail? tempsTravail: tempsPause) + 1000);
+        document.documentElement.style.setProperty('--progression', Math.round(100 * 100 * progression) / 100 + "%");
     }
+
+    window.requestAnimationFrame(function () {
+        cycle(dateFin);
+    });
 }
 
 /**
- * Lance le pomodoro ou redèmare le pomodoro
+ * Lance le pomodoro ou recharge la page
  */
 function pomodoro() {
     if (BOUTON.textContent === NOM_BOUTON_TRAVAIL) {
         applicationEnFonctionnement = true;
         BOUTON.textContent = NOM_BOUTON_PAUSE;
-        
-        dateFin = creerDateFin(tempsTravail);
 
-        setInterval(() => {
-            dateActuelle = Date.now();
-            afficherTemps();
-            compteARebour();
-        }, 1000);
+        cycle(calculerDateFin(Date.now(), tempsTravail));
+
     } else if (BOUTON.textContent === NOM_BOUTON_PAUSE) {
         location.reload();  // Redémare l'application
     } else {

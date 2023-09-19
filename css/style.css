@@ -5,6 +5,7 @@
     --color-primary: rgb(25, 136, 201);
     --color-secondary: #1565c0;
     --color-text-primary: rgb(255, 255, 255);
+    --color-border: rgb(255, 255, 255);
 }
 
 body {
@@ -25,17 +26,27 @@ body {
 }
 
 #cercle {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
     height: 200px;
     width: 200px;
 
     margin-left: auto;
     margin-right: auto;
 
-    border: 2px solid white;
+    /*border: 2px solid white;*/
     border-radius: 50%;
 
     color: var(--color-text-primary);
-    background-color: var(--color-secondary);
+
+    background:
+        linear-gradient(var(--color-secondary), var(--color-secondary))
+        content-box no-repeat,
+        conic-gradient(rgb(208, 26, 29) var(--progression, 0%), 0, var(--color-border))
+        border-box
+    ;
 }
 
 #temps {
@@ -48,6 +59,13 @@ body {
 
 #bouton {
     margin: 1%;
+    cursor: pointer;
+}
+
+.donut {
+    aspect-ratio: 1 / 1 ;
+    border-radius: 50%;
+    border:1.5vmin solid transparent;
 }
 
 .boite {
@@ -60,7 +78,7 @@ body {
     background-color: var(--color-secondary);
     color: var(--color-text-primary);
 
-    border: 2px solid white;
+    border: 2px solid var(--color-border);
     border-radius: 3px;
 }
 
