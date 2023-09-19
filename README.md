@@ -28,6 +28,7 @@ Faites vos modifications, puis je les fusionnerai si elles sont pertinentes.
 * @princecorg pour ses cours sur le JavaScript ;
 * IUT Caen pour la formation ;
 * @Rayveni pour l'animation du compte à rebours.
+* @TintinLeGrand pour l'icône du site.
 
 ## 📬 Contact
 
