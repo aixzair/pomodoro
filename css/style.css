@@ -60,6 +60,7 @@ body {
 #bouton {
     margin: 1%;
     cursor: pointer;
+    user-select: none;
 }
 
 .donut {
