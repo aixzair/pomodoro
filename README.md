@@ -1,27 +1,34 @@
-# Pomodoro
+# ⏰ Pomodoro
 
-Un outils de travail : gérer votre temps de travail et votre temps de pause.
+Un outil de travail : gérez votre temps de travail et votre temps de pause.
 
-## Auteur
+## 👤 Auteur
 
-Aixzair : Alexandre Lerosier TP 2.1
+Auteur : Alexandre Lerosier - TP 2.1
 
-## Fonctionnalités
+## 💡 Fonctionnalités
 
-* Voir votre temps de pause et de travail en temps réel ;
-* choisir la durée de votre temps de travail et de pause ;
-* pouvoir redémarrer l'application.
+* Visualisez votre temps de pause et de travail en temps réel ;
+* Choisissez la durée de votre temps de travail et de pause ;
+* Redémarrer l'application.
 
-## Installation
+## 👨‍💻 Utilisation
 
-Télécharger les fichiers et ouvré `index.html` avec votre navigateur préféré.
+1. Ouvrez le lien : https://aixzair.github.io/r3.01_pomodoro/
+2. Réglez les durées de travail et de pause en déplaçant les curseurs.
+3. Cliquez sur le bouton "commencer" pour démarrer l'application.
+4. Cliquez sur le bouton "recommencer" pour redémarrer l'application.
 
-## Utilisation
+## 📝 Contribuer
 
-1. Réglé les durées de travail et de pause en déplacent les curseurs.
-2. Cliqué sur le bouton "commencer" pour démarer l'application.
-3. Cliqué sur le boutonr "recommencer" pour redémarer l'application.
+Faites vos modifications, puis je les fusionnerai si elles sont pertinentes.
 
-## Contribuer
+## 🙏 Crédits
 
-Faites vos modifications puis je les mergerais si elles sont pertinentes.
+* @princecorg pour ses cours sur le JavaScript ;
+* IUT Caen pour la formation ;
+* @Rayveni pour l'animation du compte à rebours.
+
+## 📬 Contact
+
+* alex.lerosier@gmail.com
