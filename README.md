@@ -14,7 +14,7 @@ Auteur : Alexandre Lerosier - TP 2.1
 
 ## 👨‍💻 Utilisation
 
-1. Ouvrez le lien : https://aixzair.github.io/r3.01_pomodoro/
+1. Ouvrez le lien : https://aixzair.github.io/pomodoro/
 2. Réglez les durées de travail et de pause en déplaçant les curseurs.
 3. Cliquez sur le bouton "commencer" pour démarrer l'application.
 4. Cliquez sur le bouton "recommencer" pour redémarrer l'application.
